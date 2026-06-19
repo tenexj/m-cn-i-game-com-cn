@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tenexj.github.io/m-cn-i-game-com-cn/sitemap.xml

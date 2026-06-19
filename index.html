@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+    <title>从零认识爱游戏 · 一个帮你快速分辨游戏类型的网站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Helvetica, Arial, sans-serif;
+            background: linear-gradient(145deg, #fde7cf 0%, #fcd9bc 50%, #fbc9a5 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.25rem;
+            line-height: 1.7;
+            color: #3d2c1e;
+        }
+        .blog-card {
+            max-width: 820px;
+            width: 100%;
+            background: #fffcf9;
+            border-radius: 36px;
+            box-shadow: 0 20px 40px -12px rgba(160, 95, 55, 0.22), 0 8px 16px -6px rgba(140, 80, 40, 0.08);
+            padding: 2.8rem 2.4rem;
+            transition: box-shadow 0.25s ease;
+            backdrop-filter: blur(2px);
+        }
+        @media (max-width: 540px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .blog-card {
+                padding: 2rem 1.5rem;
+                border-radius: 28px;
+            }
+        }
+        .article-title {
+            font-size: 2.4rem;
+            font-weight: 560;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            background: linear-gradient(to right, #a35f2e, #c67a44);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.35rem;
+        }
+        .article-meta {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.6rem 1rem;
+            font-size: 0.95rem;
+            color: #8d6f53;
+            border-bottom: 1px solid #efddd0;
+            padding-bottom: 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+        .lead {
+            font-size: 1.2rem;
+            font-weight: 410;
+            background: #fbf1e9;
+            padding: 0.8rem 1.2rem;
+            border-radius: 32px 12px 32px 12px;
+            color: #4f3823;
+            margin-bottom: 2rem;
+            border-left: 4px solid #d79864;
+        }
+        .text-body {
+            margin-bottom: 1.7rem;
+        }
+        .text-body p {
+            margin-bottom: 1.25rem;
+        }
+        .text-body p:last-child {
+            margin-bottom: 0.4rem;
+        }
+        .insight-quote {
+            background: #f8ede3;
+            border-radius: 28px 8px 28px 8px;
+            padding: 1.2rem 1.6rem;
+            margin: 1.8rem 0 2rem 0;
+            font-style: normal;
+            color: #543d29;
+            border: 1px dashed #dbaa82;
+            position: relative;
+        }
+        .insight-quote::before {
+            content: "💡 一个小视角";
+            display: block;
+            font-weight: 560;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            color: #a86d3e;
+            margin-bottom: 0.4rem;
+        }
+        .link-sentence {
+            background: #f9efe6;
+            padding: 1rem 1.4rem;
+            border-radius: 60px 18px 60px 18px;
+            margin: 2rem 0 1.6rem 0;
+            font-size: 1.1rem;
+            text-align: center;
+            border: 1px solid #eacfb8;
+        }
+        .link-sentence a {
+            color: #b55d27;
+            text-decoration: none;
+            font-weight: 540;
+            background: #ffffffd0;
+            padding: 0.2rem 1rem;
+            border-radius: 48px;
+            transition: all 0.18s ease;
+            box-shadow: 0 1px 4px rgba(170, 100, 50, 0.12);
+            display: inline-block;
+            margin: 0 0.1rem;
+        }
+        .link-sentence a:hover {
+            background: #b55d27;
+            color: #fff6ed;
+            box-shadow: 0 4px 12px rgba(180, 90, 30, 0.25);
+            transform: scale(1.02);
+        }
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 1.6rem 0 2.2rem 0;
+        }
+        .feature-item {
+            flex: 1 1 180px;
+            background: #fdf7f1;
+            padding: 0.9rem 1.1rem;
+            border-radius: 20px;
+            border-left: 3px solid #dbaa82;
+            font-size: 0.98rem;
+        }
+        .feature-item strong {
+            display: block;
+            font-weight: 560;
+            color: #824f2a;
+            margin-bottom: 0.2rem;
+        }
+        .faq-note {
+            background: #f4e6db;
+            border-radius: 24px;
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+        .faq-note details {
+            margin-bottom: 0.6rem;
+            cursor: default;
+        }
+        .faq-note details:last-child {
+            margin-bottom: 0;
+        }
+        .faq-note summary {
+            font-weight: 500;
+            color: #623f24;
+            padding: 0.2rem 0;
+            cursor: pointer;
+        }
+        .faq-note summary::marker {
+            color: #b88055;
+        }
+        .faq-note p {
+            margin: 0.5rem 0 0.2rem 1.2rem;
+            color: #4d3624;
+            font-size: 0.95rem;
+        }
+        .footer-note {
+            margin-top: 2.4rem;
+            font-size: 0.9rem;
+            color: #937557;
+            text-align: right;
+            border-top: 1px solid #eddaca;
+            padding-top: 1.2rem;
+            letter-spacing: 0.2px;
+        }
+        .footer-note span {
+            background: #f3e1d1;
+            padding: 0.15rem 0.6rem;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="blog-card">
+    <h1 class="article-title">爱游戏 · 快速看懂一个游戏</h1>
+    <div class="article-meta">
+        <span>📌 网站用途指南</span>
+        <span>·</span>
+        <span>一篇帮你节省时间的介绍</span>
+    </div>
+
+    <div class="lead">
+        第一次打开一个游戏网站，最怕的就是绕了半天还不知道它是做什么的。<br>
+        所以这篇文字，帮你直接找到答案。
+    </div>
+
+    <div class="text-body">
+        <p><strong>爱游戏</strong> 不是一个装满游戏下载链接的仓库，也不是评测机构。它的核心角色更像一个“翻译器”：当你看到一款游戏的名字、画面或简介，却不确定它到底属于什么类型、适不适合你，<strong>爱游戏</strong> 会帮你快速拆解游戏的核心分类、玩法倾向和常见标签。</p>
+        <p>很多玩家都有过这样的经历——因为封面或标题下载了一款游戏，玩了几分钟才发现根本不是自己期待的类型。在手游和独立游戏越来越多的今天，快速分辨游戏类型已经成为一种实实在在的需求。<strong>爱游戏</strong> 恰好出现在这个位置上：它不替你玩，但替你理清“这到底是什么游戏”。</p>
+    </div>
+
+    <div class="insight-quote">
+        一个简单的例子：如果你看到某个游戏既有卡牌抽卡又有塔防元素，<strong>爱游戏</strong> 会用很 concise 的方式告诉你它偏向哪一类，而不是模棱两可的“策略”。这种清晰感，有时候比长篇评测更有价值。
+    </div>
+
+    <div class="link-sentence">
+        🕹️ 如果你还没试过，可以去 <a href="https://m-cn-i-game.com.cn">爱游戏</a> 看一眼它的首页，三分钟内你就能判断它是否对你有帮助。
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-item">
+            <strong>🔍 一眼识别</strong>
+            输入游戏名称或简述，快速返回类型倾向、常见分类标签。
+        </div>
+        <div class="feature-item">
+            <strong>🧩 轻量实用</strong>
+            没有冗长测评，只提炼核心游戏类别，节省筛选时间。
+        </div>
+        <div class="feature-item">
+            <strong>📊 多标签交叉</strong>
+            比如“角色扮演 + 模拟经营”或“动作 + 轻度解谜”，比单一分类更贴近真实体验。
+        </div>
+    </div>
+
+    <div class="text-body">
+        <p>当然，<strong>爱游戏</strong> 的定位决定了它更适合那些对游戏类型有一定感知，但需要快速确认或对比的玩家。如果你已经非常清楚自己只玩某一个固定类型，它可能只是你的参考之一。但如果你偶尔想尝试新类型，又怕踩雷，它会成为很有帮助的向导。</p>
+        <p>站内没有排行榜，没有诱导充值，也没有“必须下载”的按钮。这让人很放松——它就像一本小小的游戏分类词典，你在需要的时候翻一下，然后继续去做自己的事。</p>
+    </div>
+
+    <div class="faq-note">
+        <details>
+            <summary>🤔 爱游戏需要注册吗？</summary>
+            <p>不需要。直接访问网站就能使用核心的分类识别功能，没有任何注册门槛。</p>
+        </details>
+        <details>
+            <summary>💬 它支持哪些类型的游戏？</summary>
+            <p>覆盖主流移动端、PC 及主机游戏类别，尤其对国产手游和独立游戏有比较细致的分类。具体可以到站内浏览示例。</p>
+        </details>
+        <details>
+            <summary>📱 手机上看体验如何？</summary>
+            <p>页面做了较好的适配，在移动端浏览信息流和分类卡片都很流畅，没有弹窗干扰。</p>
+        </details>
+    </div>
+
+    <div class="footer-note">
+        <span>温和地识别 · 不绕弯子</span>
+        &nbsp;·&nbsp; 感谢阅读
+    </div>
+</div>
+</body>
+</html>
