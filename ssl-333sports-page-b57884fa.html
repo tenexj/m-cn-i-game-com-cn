@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>333体育 · 运动社区与赛事信息</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #fafaf9;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1e1e1e;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 24px 100px;
+    }
+
+    /* 主视觉 */
+    .hero {
+      margin-bottom: 64px;
+    }
+
+    .hero__eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #9c9c9c;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.18;
+      color: #111;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      color: #4a4a4a;
+      max-width: 600px;
+    }
+
+    /* 卡片标题层级 */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #b0b0b0;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eaeaea;
+      padding-bottom: 10px;
+    }
+
+    /* 用途卡片 —— 信息卡片式 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 20px;
+      padding: 28px 20px 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
+      border: 1px solid #f0f0f0;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+      border-color: #dcdcdc;
+    }
+
+    .card__icon {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #1a1a1a;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #5a5a5a;
+      line-height: 1.6;
+    }
+
+    /* 适合人群 — 简洁列表式卡片 */
+    .audience-list {
+      list-style: none;
+      margin-bottom: 56px;
+    }
+
+    .audience-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 14px 0;
+      border-bottom: 1px solid #efefef;
+      font-size: 1rem;
+    }
+
+    .audience-list li:last-child {
+      border-bottom: none;
+    }
+
+    .audience-marker {
+      font-weight: 400;
+      color: #b8b8b8;
+      min-width: 24px;
+    }
+
+    /* 自然链接段落 */
+    .link-paragraph {
+      background: #ffffff;
+      padding: 32px 28px;
+      border-radius: 24px;
+      margin: 48px 0 40px;
+      border: 1px solid #ededed;
+    }
+
+    .link-paragraph p {
+      font-size: 1rem;
+      color: #2c2c2c;
+      margin-bottom: 18px;
+    }
+
+    .link-paragraph p:last-child {
+      margin-bottom: 0;
+    }
+
+    .link-paragraph a {
+      color: #1a5c2a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1.5px solid #cde0d3;
+      transition: border-color 0.15s;
+    }
+
+    .link-paragraph a:hover {
+      border-bottom-color: #1a5c2a;
+    }
+
+    /* FAQ 摘要 */
+    .faq-summary {
+      margin-top: 48px;
+    }
+
+    .faq-item {
+      padding: 20px 0;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .faq-item:last-of-type {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 500;
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: #1e1e1e;
+    }
+
+    .faq-a {
+      font-size: 0.9rem;
+      color: #6a6a6a;
+      line-height: 1.7;
+    }
+
+    .faq-a a {
+      color: #1a5c2a;
+      border-bottom: 1px dotted #bbb;
+      text-decoration: none;
+    }
+
+    .faq-a a:hover {
+      border-bottom-color: #1a5c2a;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e2e2;
+      margin: 48px 0 32px;
+    }
+
+    .soft-note {
+      font-size: 0.85rem;
+      color: #9a9a9a;
+      text-align: center;
+      margin-top: 56px;
+      letter-spacing: 0.01em;
+    }
+
+    /* 响应式 */
+    @media (max-width: 600px) {
+      .page {
+        padding: 48px 20px 80px;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      .link-paragraph {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- 主视觉 -->
+    <div class="hero">
+      <div class="hero__eyebrow">运动 · 信息 · 日常</div>
+      <h1>再次回到这里<br>收藏一处体育角落</h1>
+      <p>有些站点，值得你放慢脚步，反复停留。333体育 就像这样一个地方——不嘈杂，不追赶，只是安静地提供关于运动、赛事与社群的真实切面。</p>
+    </div>
+
+    <!-- 用途卡片：信息卡片式 -->
+    <div>
+      <div class="section-label">它可以是你的</div>
+      <div class="card-grid">
+        <div class="card">
+          <span class="card__icon">📋</span>
+          <h3>赛事速览</h3>
+          <p>从联赛对阵到杯赛走势，信息密度恰到好处，没有多余干扰。</p>
+        </div>
+        <div class="card">
+          <span class="card__icon">📎</span>
+          <h3>收藏夹里的坐标</h3>
+          <p>无论你习惯用书签还是笔记，它都值得被固定在一个顺手的位置。</p>
+        </div>
+        <div class="card">
+          <span class="card__icon">🔄</span>
+          <h3>不定期回访的理由</h3>
+          <p>内容更新不喧哗，但总有新视角或旧数据的重新整理，值得再看一眼。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 适合人群 -->
+    <div>
+      <div class="section-label">适合这样的人群</div>
+      <ul class="audience-list">
+        <li><span class="audience-marker">—</span> 日常浏览体育资讯，但讨厌弹窗与信息轰炸的人</li>
+        <li><span class="audience-marker">—</span> 习惯把好用的站点存进收藏夹、隔段时间再回来看看的人</li>
+        <li><span class="audience-marker">—</span> 对赛事数据、队伍变动、赛季节奏有持续关注需求的爱好者</li>
+        <li><span class="audience-marker">—</span> 偏好干净排版、不喜欢浮夸设计的阅读型访客</li>
+      </ul>
+    </div>
+
+    <!-- 自然链接段落 -->
+    <div class="link-paragraph">
+      <p>
+        如果你之前已经来过，大概记得那种克制的界面风格和直接的信息呈现。如果你是新近留意到它，不妨从一次简单的浏览开始。你可以把 <a href="https://ssl-333sports.com">333体育</a> 看作一个持续更新的档案室——没有花哨的引导，只有内容本身。
+      </p>
+      <p>
+        有时你只是想确认某个联赛的近期赛果，或者翻看一下过去几轮的趋势，它都能提供一个足够安静、不被干扰的阅读空间。这也是为什么，有些访客会一次又一次地回来。
+      </p>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-summary">
+      <div class="section-label">一些常见的小疑问</div>
+      <div class="faq-item">
+        <div class="faq-q">内容更新频率如何？</div>
+        <div class="faq-a">不算密集，但保持节奏。更倾向于在关键节点或赛季转换时进行补充。你可以将 <a href="https://ssl-333sports.com">333体育</a> 加入书签，隔一段时间回来看一眼。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">是否适合移动端浏览？</div>
+        <div class="faq-a">页面针对窄屏做过适配，阅读体验比较清爽。当然，在桌面端宽屏下会更舒展。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">需要注册或登录吗？</div>
+        <div class="faq-a">不需要。直接打开就可以浏览已有内容，没有任何强制门槛。</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="soft-note">
+      <span>信息卡片 · 极简留白 · 适合安静阅读</span>
+    </div>
+
+  </div>
+</body>
+</html>
